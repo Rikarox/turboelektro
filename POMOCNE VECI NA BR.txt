@@ -1,0 +1,4 @@
+delete suboru
+
+https://www.tutorialspoint.com/javaexamples/file_delete.htm
+http://stackoverflow.com/questions/32682269/buffered-reader-and-file-delete
