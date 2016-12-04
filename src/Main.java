@@ -5,17 +5,17 @@ public class Main {
 	// ints,string,float,chars here..
 	
 	
-	public static void intro(){
-		//animejšn
+	public static void intro() throws InterruptedException{
+		System.out.printf("Loading shop.");
+		TimeUnit.SECONDS.sleep(1);   
 	}
 	
 	public static void main(String[] args) throws InterruptedException {
-		// System.out.printf("Loading shop.");
-		// TimeUnit.SECONDS.sleep(1);    sleepo
+		
 		
 		//intro Shop text, wait 5 sec   --------------------------------------------------------------------------
 			
-		intro(); 
+		//intro(); 
 		
 		
 		//Main menu ----------------------------------------------------------------------------------------------
