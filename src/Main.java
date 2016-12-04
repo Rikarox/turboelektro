@@ -1,6 +1,11 @@
 /*
  *  TURBOSHOP ULTRA BEAST ELECTRO SHOP @miko @bundy @roxor
  */
+
+	/*______________________________________________________
+	 * 
+	 *______________________________________________________
+	 */
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -16,6 +21,7 @@ public class Main {
 	
 	/* ______________________________________________________
 	 * menuShow() 
+	 * line();
 	 * 1) Products
 	 * 2) Buy product
 	 * 3) Random Sell //Simulacia kupujuceho
@@ -41,25 +47,104 @@ public class Main {
 	/*______________________________________________________ 
 	 * nameSet()
 	 * scanner na string nameSet
-	 * nameSet = companyName
-	 * vytvorenie suboru compname
+	 * companyName = nameSet
+	 * vytvorenie suboru compname.txt
 	 * zapisanie mena do suboru 
-	 * vytvorenie suboru compmoney
+	 * vytvorenie suboru compmoney.txt
 	 * 5000 convert to HASH  !!!! O to sa postara rikarox..
-	 * zapisanie hashu do compmoney
+	 * zapisanie hashu do compmoney.txt
 	 * nameOn = 1
+	 * productSetUp();
 	 *______________________________________________________
 	 */
 	
+	
+	/*______________________________________________________
+	 *list() 
+	 *line();
+	 *______________________________________________________
+	 */
+	
+	/*______________________________________________________
+	 *buy() 
+	 *line();
+	 *______________________________________________________
+	 */
+	
+	/*______________________________________________________
+	 *sell()
+	 *line(); 
+	 *______________________________________________________
+	 */
+	
+	/*______________________________________________________
+	 *randomSell() 
+	 *line();
+	 *______________________________________________________
+	 */
+	
+	/*______________________________________________________
+	 *settings() 
+	 *line();
+	 *vypis
+	 *1)zmena mena
+	 *2)odznova
+	 * scanner na settingsVyber
+	 * case abo if. 
+	 * 
+	 * nameChange();
+	 * restartProgram();
+	 *______________________________________________________
+	 */
+	
+	/*______________________________________________________
+	 *credits() 
+	 *printf kto to vyrobil a preco(skolska uloha)
+	 *______________________________________________________
+	 */
+	
+	/*______________________________________________________
+	 *exit()
+	 *ukoncit program 
+	 *______________________________________________________
+	 */
+	
+	/*______________________________________________________
+	 *nameChange()
+	 *scanner na string nameSet
+	 *companyName = nameSet 
+	 *zapis mena do compname.txt
+	 *menuShow();
+	 *______________________________________________________
+	 */
+	
+	/*______________________________________________________
+	 *restartProgram()
+	 *bud delete suborov alebo len nahradenie prazdnym
+	 *nameOn = 0;
+	 *exit();
+	 *______________________________________________________
+	 */
 	
 	public static void main(String[] args) throws InterruptedException {
 		//if boolean nameOn = 1 pokracuj, else nameSet();
 			
 		//intro(); 
-		//line();
 		
 		//menuShow(); <- vypis moznosti
 		// Scanner na int vyberMenu (1,2,3,4,5,6,7, if other do printf prazdnu medzeru)
+		// case abo if, na vyber moznosti
+		/*
+		 * list();
+		 * buy();
+		 * sell();
+		 * randomSell();  *optional moznost
+		 * settings();
+		 * credits();
+		 * exit();
+		 * 
+		 * 
+		 */
 		
 		// line();
 		
