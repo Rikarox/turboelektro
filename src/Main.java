@@ -96,17 +96,21 @@ public class Main {
 	 *vypis
 	 *1)zmena mena
 	 *2)odznova
+	 *3)back
 	 * scanner na settingsVyber
 	 * case abo if. 
 	 * 
-	 * nameChange();
-	 * restartProgram();
+	 * nameChange(); 1
+	 * restartProgram(); 2
+	 * menuShow(); 3
 	 *______________________________________________________
 	 */
 	
 	/*______________________________________________________
 	 *credits() 
 	 *printf kto to vyrobil a preco(skolska uloha)
+	 *Space to continue
+	 *menuShow();
 	 *______________________________________________________
 	 */
 	
@@ -137,7 +141,8 @@ public class Main {
 	 *productSetUp()
 	 *najoblubenejsia uloha
 	 *vytvorit products.txt
-	 *zapisat ich tam  
+	 *zapisat ich tam
+	 *menuShow();  
 	 *______________________________________________________
 	 */
 	
