@@ -62,24 +62,31 @@ public class Main {
 	/*______________________________________________________
 	 *list() 
 	 *line();
+	 * otvorit subor products.txt
+	 * vypis
+	 *  dorobim pondelok
 	 *______________________________________________________
 	 */
 	
 	/*______________________________________________________
 	 *buy() 
 	 *line();
+	 *aj toto necham na pondelok
 	 *______________________________________________________
 	 */
 	
 	/*______________________________________________________
 	 *sell()
 	 *line(); 
+	 * sell current product, k tomu sa vyjardim pondelok :D
 	 *______________________________________________________
 	 */
 	
 	/*______________________________________________________
 	 *randomSell() 
 	 *line();
+	 *
+	 *   toto mozno bude mozno nebude je to optional ci sa nam chce s tym srat
 	 *______________________________________________________
 	 */
 	
@@ -120,9 +127,17 @@ public class Main {
 	
 	/*______________________________________________________
 	 *restartProgram()
-	 *bud delete suborov alebo len nahradenie prazdnym
+	 *bud delete suborov alebo len nahradenie prazdnym, asi skor delete
 	 *nameOn = 0;
 	 *exit();
+	 *______________________________________________________
+	 */
+	
+	/*______________________________________________________
+	 *productSetUp()
+	 *najoblubenejsia uloha
+	 *vytvorit products.txt
+	 *zapisat ich tam  
 	 *______________________________________________________
 	 */
 	
