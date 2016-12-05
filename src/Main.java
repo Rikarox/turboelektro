@@ -34,23 +34,17 @@ public class Main {
 	 */
 	
 	
-	/*______________________________________________________ 
-	 * line(){
-	 * vypise medzeru 2x
-	 * vypise odelovaciu ciaru
-	 * decodeRX5();
-	 * money = fo;
-	 * companyName zo suboru compname, money zo suboru compmoney
-	 * dalsia odelovacia ciara
-	 * 
-	 * cize nejak takto:
-	 * 
-	 * 
-	 * _______________________________________
-	 * Money: 2500 €     Name: Turboelektro
-	 * 
-	 *______________________________________________________
-	 */
+	
+	public static void line(){
+	System.out.println("");
+	System.out.println("");
+	System.out.println("_______________________________________");
+	// decodeRX5();
+	//money = fo;
+	// companyName zo suboru compname, money zo suboru compmoney
+	System.out.println("Money: "       + "Shop Name: ");
+	System.out.println();
+	}
 	
 	
 	/*______________________________________________________ 
