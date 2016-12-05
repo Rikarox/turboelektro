@@ -5,6 +5,8 @@
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
 public class Main {
 	// ints,string,float,chars here.. dame ich ako public do mainu
 	
@@ -36,7 +38,8 @@ public class Main {
 	 * line(){
 	 * vypise medzeru 2x
 	 * vypise odelovaciu ciaru
-	 * HASH to int money !!!! o to sa postara rikarox.. 
+	 * decodeRX5();
+	 * money = fo;
 	 * companyName zo suboru compname, money zo suboru compmoney
 	 * dalsia odelovacia ciara
 	 * 
@@ -170,11 +173,43 @@ public class Main {
 	 */
 	
 	
+	/*______________________________________________________
+	 * 
+	 * decodeRX5(){
+	 * ziskat zo suboru money.txt do jedneho stringu
+	 * 
+	 *  tu workin on moj kod na konvertovanie
+	 * String a = "abb";
+		
+		
+		//a.replace('a','c');
+		a = a.replace('a', '5');
+		a = a.replace('b', '0');
+		
+
+		System.out.println(a);
+		int foo = Integer.parseInt(a);
+		foo++;
+		
+		System.out.println(foo);
+	 * ______________________________________________________
+	 */
+	
+	/*______________________________________________________
+	 * 
+	 * encodeRX5(){
+	 * money do stringu en
+	 * en sa prekonvertuje mojim kodom na znaky
+	 * zapisat do suboru money.txt
+	 * ______________________________________________________
+	 */
+	
 	
 	public static void main(String[] args) throws InterruptedException {
 		//checkOut();
 		//intro(); 
 		
+
 		//menuShow(); <- vypis moznosti
 		// Scanner na int vyberMenu (1,2,3,4,5 if other do printf prazdnu medzeru)
 		// case abo if, na vyber moznosti
