@@ -187,21 +187,50 @@ public class Main {
 
 	 }
 	
-	/*______________________________________________________
-	 * 
-	 * encodeRX5(){
-	 * money do stringu en
-	 * en sa prekonvertuje mojim kodom na znaky
-	 * zapisat do suboru money.txt
-	 * ______________________________________________________
-	 */
 	
+	 public static void randomLetters(){
+		 Random r = new Random();
+
+		    String alphabet = "asdfghjklzcvbnm";
+		    for (int i = 0; i < 5; i++) {
+		    	//zapis do suboru money.txt
+		        System.out.println(alphabet.charAt(r.nextInt(alphabet.length())));
+		    } 
+	 }
+	 
+	 
+	 public static void encodeRX5(){
+		//vymazat vsetko zo suboru money.txt
+		randomLetters();
+	    
+	    StringBuilder fooConv = new StringBuilder();
+	    fooConv.append("");
+	    fooConv.append(money);
+	    foo = fooConv.toString();
+	    
+		foo = foo.replace('1', 'q');
+		foo = foo.replace('2', 'w');
+		foo = foo.replace('3', 'e');
+		foo = foo.replace('4', 'r');
+		foo = foo.replace('5', 't');
+		foo = foo.replace('6', 'y');
+		foo = foo.replace('7', 'u');
+		foo = foo.replace('8', 'i');
+		foo = foo.replace('9', 'o');
+		foo = foo.replace('0', 'p');
+		
+	    //zapisat foo do money.txt
+        //zapisat do suboru "x"
+		randomLetters();
+	 }
+
+	 
 	
 	public static void main(String[] args) throws InterruptedException {
 		//checkOut();
 		//intro();
 
-		
+
 
 		//menuShow(); <- vypis moznosti
 		// Scanner na int vyberMenu (1,2,3,4,5 if other do printf prazdnu medzeru)
