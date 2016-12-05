@@ -50,6 +50,7 @@ public class Main {
 	System.out.println();
 	}
 	
+	public static void nameSet(){}
 	
 	/*______________________________________________________ 
 	 * nameSet(){
@@ -65,6 +66,7 @@ public class Main {
 	 *______________________________________________________
 	 */
 	
+	public static void list(){}
 	
 	/*______________________________________________________
 	 *list(){ 
@@ -82,6 +84,8 @@ public class Main {
 	 *______________________________________________________
 	 */
 	
+	public static void buy(){}
+	
 	/*______________________________________________________
 	 *buy(){ 
 	 *line();
@@ -91,6 +95,8 @@ public class Main {
 	 *______________________________________________________
 	 */
 	
+	public static void sell(){}
+	
 	/*______________________________________________________
 	 *sell(){ 
 	 * otazka.. cislo produktu ktory chce predat
@@ -98,14 +104,9 @@ public class Main {
 	 *______________________________________________________
 	 */
 	
-	/*______________________________________________________
-	 *randomSell(){ 
-	 *line();
-	 *
-	 *   toto mozno bude mozno nebude je to optional ci sa nam chce s tym srat
-	 *   asi kasleme na toto :D
-	 *______________________________________________________
-	 */
+	
+	
+	public static void settings(){}
 	
 	/*______________________________________________________
 	 *settings(){ 
@@ -123,6 +124,9 @@ public class Main {
 	 *______________________________________________________
 	 */
 	
+	
+	public static void credits(){}
+	
 	/*______________________________________________________
 	 *credits(){ 
 	 *printf kto to vyrobil a preco(skolska uloha)
@@ -135,6 +139,8 @@ public class Main {
 	 System.exit(0);
 	}
 	
+	public static void nameChange(){}
+	
 	/*______________________________________________________
 	 *nameChange(){
 	 *scanner na string nameSet
@@ -144,6 +150,8 @@ public class Main {
 	 *______________________________________________________
 	 */
 	
+	public static void restartProgram(){}
+	
 	/*______________________________________________________
 	 *restartProgram(){
 	 *bud delete suborov alebo len nahradenie prazdnym, asi skor delete
@@ -151,6 +159,8 @@ public class Main {
 	 *exit();
 	 *______________________________________________________
 	 */
+	
+	public static void productSetUp(){}
 	
 	/*______________________________________________________
 	 *productSetUp(){
@@ -160,6 +170,8 @@ public class Main {
 	 *menuShow();  
 	 *______________________________________________________
 	 */
+	
+	public static void checkOut(){}
 	
 	/*______________________________________________________
 	 *checkOut(){
