@@ -34,6 +34,8 @@ public class Main {
 		 System.out.println("5) Credits");
 		 System.out.println("6) Exit");
 		 
+		 menuChoice = sc.nextInt();
+		 
 		
 	 }
 	
@@ -231,6 +233,17 @@ public class Main {
 		foo = foo.replace('9', 'o');
 		foo = foo.replace('0', 'p');
 		
+		String[] fooArray =foo.split("(?!^)");
+		
+		int aa=0;
+		int i=0;
+		while (i != fooArray.length){
+			
+		//fooArray[a] print do suboru
+		aa++;
+		i++;
+		}
+		
 	    //zapisat foo do money.txt
         //zapisat do suboru "x"
 		randomLetters();
@@ -248,9 +261,8 @@ public class Main {
 		//intro();
 
 
-
+		
 		menuShow();
-		menuChoice = sc.nextInt();
 		if(menuChoice == 1){
 		list();	
 		}
