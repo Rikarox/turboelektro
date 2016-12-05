@@ -1,7 +1,7 @@
 /*
  *  TURBOSHOP ULTRA BEAST ELECTRO SHOP @miko @bundy @roxor
  */
-//Adamyko was here ^^
+
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -12,6 +12,9 @@ public class Main {
 	public static String foo;
 	public static int fooInt;
 	private static int money;
+	public static Scanner sc = new Scanner(System.in);
+	public static int menuChoice;
+	
 	// JUST FOR FUN
 	public static void intro() throws InterruptedException{
 		System.out.printf("Loading shop.");
@@ -22,18 +25,17 @@ public class Main {
 	}
 	
 	
-	/* ______________________________________________________
-	 * menuShow(){
-	 * line();
-	 * 1) Products
-	 * 2) Buy product
-	 * 3) Random Sell //Simulacia kupujuceho
-	 * 4) Sell product
-	 * 5) Settings
-	 * 6) Credits
-	 * 7) Exit
-	 * ______________________________________________________
-	 */
+	 public static void menuShow(){
+		 line();
+		 System.out.println("1) Products");
+		 System.out.println("2) Buy");
+		 System.out.println("3) Sell");
+		 System.out.println("4) Settings");
+		 System.out.println("5) Credits");
+		 System.out.println("6) Exit");
+		 
+		
+	 }
 	
 	
 	
@@ -129,11 +131,9 @@ public class Main {
 	 *______________________________________________________
 	 */
 	
-	/*______________________________________________________
-	 *exit(){
-	 *System.exit(0)
-	 *______________________________________________________
-	 */
+	public static void exit(){
+	 System.exit(0);
+	}
 	
 	/*______________________________________________________
 	 *nameChange(){
@@ -223,6 +223,11 @@ public class Main {
         //zapisat do suboru "x"
 		randomLetters();
 	 }
+	 
+	 public static void error() throws InterruptedException{
+		 System.out.println("Error!");
+			TimeUnit.SECONDS.sleep(1);
+	 }
 
 	 
 	
@@ -232,8 +237,33 @@ public class Main {
 
 
 
-		//menuShow(); <- vypis moznosti
-		// Scanner na int vyberMenu (1,2,3,4,5 if other do printf prazdnu medzeru)
+		menuShow();
+		menuChoice = sc.nextInt();
+		if(menuChoice == 1){
+		list();	
+		}
+		if(menuChoice == 2){
+		buy();	
+		}
+		if(menuChoice == 3){
+		sell();	
+		}
+		if(menuChoice == 4){
+		settings();	
+		}
+		if(menuChoice == 5){
+		credits();	
+		}
+		if(menuChoice == 6){
+		exit();	
+		}
+		if(menuChoice != 1 || menuChoice != 2 || menuChoice != 3 || menuChoice != 4 || menuChoice != 5 || menuChoice != 6 ){
+		error();
+		menuShow();
+		}
+
+		
+		
 		// case abo if, na vyber moznosti
 		/*
 		 * list();
