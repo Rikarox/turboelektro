@@ -2,10 +2,6 @@
  *  TURBOSHOP ULTRA BEAST ELECTRO SHOP @miko @bundy @roxor
  */
 
-	/*______________________________________________________
-	 * 
-	 *______________________________________________________
-	 */
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -15,12 +11,15 @@ public class Main {
 	// srandicky na intro loading a pod. casove hluposti
 	public static void intro() throws InterruptedException{
 		System.out.printf("Loading shop.");
-		TimeUnit.SECONDS.sleep(1);   
+		TimeUnit.SECONDS.sleep(1);
+		System.out.printf(".");
+		TimeUnit.SECONDS.sleep(1);
+		System.out.printf(".");
 	}
 	
 	
 	/* ______________________________________________________
-	 * menuShow() 
+	 * menuShow(){
 	 * line();
 	 * 1) Products
 	 * 2) Buy product
@@ -34,18 +33,25 @@ public class Main {
 	
 	
 	/*______________________________________________________ 
-	 * line()
-	 * vypise medzeru
+	 * line(){
+	 * vypise medzeru 2x
 	 * vypise odelovaciu ciaru
 	 * HASH to int money !!!! o to sa postara rikarox.. 
 	 * companyName zo suboru compname, money zo suboru compmoney
 	 * dalsia odelovacia ciara
+	 * 
+	 * cize nejak takto:
+	 * 
+	 * 
+	 * _______________________________________
+	 * Money: 2500 €     Name: Turboelektro
+	 * 
 	 *______________________________________________________
 	 */
 	
 	
 	/*______________________________________________________ 
-	 * nameSet()
+	 * nameSet(){
 	 * scanner na string nameSet
 	 * companyName = nameSet
 	 * vytvorenie suboru compname.txt
@@ -53,51 +59,61 @@ public class Main {
 	 * vytvorenie suboru compmoney.txt
 	 * 5000 convert to HASH  !!!! O to sa postara rikarox..
 	 * zapisanie hashu do compmoney.txt
-	 * nameOn = 1
+	 * vytvorenie suboru /zapisanie do suboru reg.txt yes // znamena ze je zaregistrovany
 	 * productSetUp();
 	 *______________________________________________________
 	 */
 	
 	
 	/*______________________________________________________
-	 *list() 
+	 *list(){ 
 	 *line();
 	 * otvorit subor products.txt
 	 * vypis
-	 *  dorobim pondelok
+	 *  pred kazdym produktom bude cislo
+	 *  
+	 *   
+	 *   otazka SELL abo BUY abo BACK(to je menu)
+	 *   
+	 *   sell();
+	 *   buy();
+	 *   menuShow();
 	 *______________________________________________________
 	 */
 	
 	/*______________________________________________________
-	 *buy() 
+	 *buy(){ 
 	 *line();
-	 *aj toto necham na pondelok
+	 *
+	 * 2 moznosti bud kupit Current cislo dodat kus
+	 * abo new product
 	 *______________________________________________________
 	 */
 	
 	/*______________________________________________________
-	 *sell()
-	 *line(); 
-	 * sell current product, k tomu sa vyjardim pondelok :D
+	 *sell(){ 
+	 * otazka.. cislo produktu ktory chce predat
+	 * toto musime poriesit ako sa na to pustime je tu viacero moznosti
 	 *______________________________________________________
 	 */
 	
 	/*______________________________________________________
-	 *randomSell() 
+	 *randomSell(){ 
 	 *line();
 	 *
 	 *   toto mozno bude mozno nebude je to optional ci sa nam chce s tym srat
+	 *   asi kasleme na toto :D
 	 *______________________________________________________
 	 */
 	
 	/*______________________________________________________
-	 *settings() 
+	 *settings(){ 
 	 *line();
 	 *vypis
 	 *1)zmena mena
 	 *2)odznova
 	 *3)back
-	 * scanner na settingsVyber
+	 * scanner na int settingsVyber
 	 * case abo if. 
 	 * 
 	 * nameChange(); 1
@@ -107,7 +123,7 @@ public class Main {
 	 */
 	
 	/*______________________________________________________
-	 *credits() 
+	 *credits(){ 
 	 *printf kto to vyrobil a preco(skolska uloha)
 	 *Space to continue
 	 *menuShow();
@@ -115,13 +131,13 @@ public class Main {
 	 */
 	
 	/*______________________________________________________
-	 *exit()
-	 *ukoncit program 
+	 *exit(){
+	 *System.exit(0)
 	 *______________________________________________________
 	 */
 	
 	/*______________________________________________________
-	 *nameChange()
+	 *nameChange(){
 	 *scanner na string nameSet
 	 *companyName = nameSet 
 	 *zapis mena do compname.txt
@@ -130,7 +146,7 @@ public class Main {
 	 */
 	
 	/*______________________________________________________
-	 *restartProgram()
+	 *restartProgram(){
 	 *bud delete suborov alebo len nahradenie prazdnym, asi skor delete
 	 *nameOn = 0;
 	 *exit();
@@ -138,7 +154,7 @@ public class Main {
 	 */
 	
 	/*______________________________________________________
-	 *productSetUp()
+	 *productSetUp(){
 	 *najoblubenejsia uloha
 	 *vytvorit products.txt
 	 *zapisat ich tam
@@ -146,18 +162,24 @@ public class Main {
 	 *______________________________________________________
 	 */
 	
+	/*______________________________________________________
+	 *checkOut(){
+	 *najst subor reg.txt
+	 *if string nameOn = yes pokracuj, else nameSet();
+	 *______________________________________________________
+	 */
+	
+	
+	
 	public static void main(String[] args) throws InterruptedException {
-		//if boolean nameOn = 1 pokracuj, else nameSet();
-			
+		//checkOut();
 		//intro(); 
 		
 		//menuShow(); <- vypis moznosti
-		// Scanner na int vyberMenu (1,2,3,4,5,6,7, if other do printf prazdnu medzeru)
+		// Scanner na int vyberMenu (1,2,3,4,5 if other do printf prazdnu medzeru)
 		// case abo if, na vyber moznosti
 		/*
 		 * list();
-		 * buy();
-		 * sell();
 		 * randomSell();  *optional moznost
 		 * settings();
 		 * credits();
