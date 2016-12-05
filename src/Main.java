@@ -9,8 +9,10 @@ import javax.swing.plaf.synth.SynthSeparatorUI;
 
 public class Main {
 	// ints,string,float,chars here.. dame ich ako public do mainu
-	
-	// srandicky na intro loading a pod. casove hluposti
+	public static String foo;
+	public static int fooInt;
+	private static int money;
+	// JUST FOR FUN
 	public static void intro() throws InterruptedException{
 		System.out.printf("Loading shop.");
 		TimeUnit.SECONDS.sleep(1);
@@ -167,27 +169,23 @@ public class Main {
 	 */
 	
 	
-	/*______________________________________________________
-	 * 
-	 * decodeRX5(){
-	 * ziskat zo suboru money.txt do jedneho stringu
-	 * 
-	 *  tu workin on moj kod na konvertovanie
-	 * String a = "abb";
-		
-		
-		//a.replace('a','c');
-		a = a.replace('a', '5');
-		a = a.replace('b', '0');
-		
+	 public static void decodeRX5(){
+		 // chcem aby so suboru money od 6 riadku tahalo znaky a zapisovalo do jedneho stringu foo, ak sa znak nebude rovnat qwertyuiop tak ukonci pridavanie
+	 foo = foo.replace('q', '1');
+	 foo = foo.replace('w', '2');
+	 foo = foo.replace('e', '3');
+	 foo = foo.replace('r', '4');
+	 foo = foo.replace('t', '5');
+	 foo = foo.replace('y', '6');
+	 foo = foo.replace('u', '7');
+	 foo = foo.replace('i', '8');
+	 foo = foo.replace('o', '9');
+	 foo = foo.replace('p', '0');
+	 
+	 fooInt = Integer.parseInt(foo);
+	 money = fooInt;	 
 
-		System.out.println(a);
-		int foo = Integer.parseInt(a);
-		foo++;
-		
-		System.out.println(foo);
-	 * ______________________________________________________
-	 */
+	 }
 	
 	/*______________________________________________________
 	 * 
@@ -201,7 +199,8 @@ public class Main {
 	
 	public static void main(String[] args) throws InterruptedException {
 		//checkOut();
-		//intro(); 
+		//intro();
+
 		
 
 		//menuShow(); <- vypis moznosti
