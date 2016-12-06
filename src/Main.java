@@ -196,39 +196,7 @@ public class Main {
 	}
 	
 	
-	
-	
-	/*______________________________________________________ 
-	 * nameSet(){
-	 * scanner na string nameSet
-	 * companyName = nameSet
-	 * vytvorenie suboru compname.txt
-	 * zapisanie mena do suboru 
-	 * vytvorenie suboru compmoney.txt
-	 * 5000 convert to HASH  !!!! O to sa postara rikarox..
-	 * zapisanie hashu do compmoney.txt
-	 * vytvorenie suboru /zapisanie do suboru reg.txt yes // znamena ze je zaregistrovany
-	 * productSetUp();
-	 *______________________________________________________
-	 */
-	
 	public static void list(){}
-	
-	/*______________________________________________________
-	 *list(){ 
-	 *line();
-	 * otvorit subor products.txt
-	 * vypis
-	 *  pred kazdym produktom bude cislo
-	 *  
-	 *   
-	 *   otazka SELL abo BUY abo BACK(to je menu)
-	 *   
-	 *   sell();
-	 *   buy();
-	 *   menuShow();
-	 *______________________________________________________
-	 */
 	
 	public static void buy() throws IOException, InterruptedException{
 		
@@ -238,14 +206,6 @@ public class Main {
 	
 	}
 	
-	/*______________________________________________________
-	 *buy(){ 
-	 *line();
-	 *
-	 * 2 moznosti bud kupit Current cislo dodat kus
-	 * abo new product
-	 *______________________________________________________
-	 */
 	
 	public static void sell(){
 		
@@ -253,15 +213,7 @@ public class Main {
 		encodeRX5();
 	}
 	
-	/*______________________________________________________
-	 *sell(){ 
-	 * otazka.. cislo produktu ktory chce predat
-	 * toto musime poriesit ako sa na to pustime je tu viacero moznosti
-	 *______________________________________________________
-	 */
-	
-	
-	
+
 	public static void settings() throws InterruptedException, IOException{
 		
 	line();
@@ -308,35 +260,25 @@ public class Main {
 	
 	public static void nameChange(){}
 	
-	/*______________________________________________________
-	 *nameChange(){
-	 *scanner na string nameSet
-	 *companyName = nameSet 
-	 *zapis mena do compname.txt
-	 *menuShow();
-	 *______________________________________________________
-	 */
 	
-	public static void restartProgram(){}
+	public static void restartProgram(){
+		
+		
+		
+		 
+	         
+	}
 	
-	/*______________________________________________________
-	 *restartProgram(){
-	 *bud delete suborov alebo len nahradenie prazdnym, asi skor delete
-	 *nameOn = 0;
-	 *exit();
-	 *______________________________________________________
-	 */
+
 	
-	public static void productSetUp(){}
+	public static void productSetUp(){
+		
+		
+	}
+
 	
-	/*______________________________________________________
-	 *productSetUp(){
-	 *najoblubenejsia uloha
-	 *vytvorit products.txt
-	 *zapisat ich tam
-	 *menuShow();  
-	 *______________________________________________________
-	 */
+	
+	
 	
 	public static void checkOut() throws IOException, InterruptedException{
 		
