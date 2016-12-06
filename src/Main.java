@@ -9,6 +9,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -83,6 +87,12 @@ public class Main {
 	System.out.println("_______________________________________");
 	System.out.println("Money: " +money +" | "      + "Shop Name: " +name);
 	System.out.println();
+	
+	}
+	
+	public static void bwka() throws IOException{
+		fwm = new FileWriter(moneypath);
+		bwm = new BufferedWriter(fwm);
 	}
 	
 	public static void nameSet() throws IOException, InterruptedException{
@@ -220,7 +230,13 @@ public class Main {
 	 *______________________________________________________
 	 */
 	
-	public static void buy(){}
+	public static void buy() throws IOException, InterruptedException{
+		
+		money = money-50;
+		encodeRX5();
+		menuShow();
+	
+	}
 	
 	/*______________________________________________________
 	 *buy(){ 
@@ -231,7 +247,11 @@ public class Main {
 	 *______________________________________________________
 	 */
 	
-	public static void sell(){}
+	public static void sell(){
+		
+		money=money-50;
+		encodeRX5();
+	}
 	
 	/*______________________________________________________
 	 *sell(){ 
@@ -340,13 +360,6 @@ public class Main {
 		
 	}
 	
-	/*______________________________________________________
-	 *checkOut(){
-	 *najst subor reg.txt
-	 *if string nameOn = yes pokracuj, else nameSet();
-	 *______________________________________________________
-	 */
-	
 	
 	 public static void decodeRX5() throws IOException{
 	 BufferedReader reader = null;
@@ -360,8 +373,7 @@ public class Main {
 		 while ((redo=br.readLine())!=null)
 	     {
 			 if(redo.equals("q") || redo.equals("w") || redo.equals("e") || redo.equals("r") || redo.equals("t") || redo.equals("y") || redo.equals("u") || redo.equals("i") || redo.equals("o") || redo.equals("p")){
-				 foo = foo +redo;
-				 System.out.println(foo);	 
+				 foo = foo +redo;	 
 			 }
 			 if(redo.equals("x")){
 				 break;
@@ -383,7 +395,7 @@ public class Main {
 	 foo = foo.replace('i', '8');
 	 foo = foo.replace('o', '9');
 	 foo = foo.replace('p', '0');
-	 System.out.println(foo);
+
 	 
 	 fooInt = Integer.parseInt(foo);
 	 money = fooInt;	 
@@ -397,16 +409,20 @@ public class Main {
 		 Random r = new Random();
 
 		    String alphabet = "asdfghjklzcvbnm";
+
 		    for (int i = 0; i < 5; i++) {
 		    	
-				try {
-					bwm.write(alphabet.charAt(r.nextInt(alphabet.length())));
-					bwm.newLine();
-					
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+		    	
+		    	
+		    	try(FileWriter fwm = new FileWriter(moneypath, true);
+					    BufferedWriter bwm = new BufferedWriter(fwm);
+					    PrintWriter out = new PrintWriter(bwm))
+					{
+					    out.println(alphabet.charAt(r.nextInt(alphabet.length())));
+					} catch (IOException e) {
+					    //exception handling left as an exercise for the reader
+					}
+		    	
 
 		    } 
 	 }
@@ -415,13 +431,9 @@ public class Main {
 	 public static void encodeRX5(){
 
 		 try{
-
-
-	    		if(fileM.delete()){
-	    			System.out.println(fileM.getName() + " is deleted!");
-	    		}else{
-	    			System.out.println("Error !");
-	    		}
+			 fwm = new FileWriter(moneypath);
+				bwm = new BufferedWriter(fwm);
+				bwm.write("");
 
 	    	}catch(Exception e){
 
@@ -441,6 +453,7 @@ public class Main {
 	    fooConv.append("");
 	    fooConv.append(money);
 	    foo = fooConv.toString();
+	    System.out.println(foo);
 	    
 		foo = foo.replace('1', 'q');
 		foo = foo.replace('2', 'w');
@@ -452,33 +465,37 @@ public class Main {
 		foo = foo.replace('8', 'i');
 		foo = foo.replace('9', 'o');
 		foo = foo.replace('0', 'p');
-		
 		String[] fooArray =foo.split("(?!^)");
 		
 		int aa=0;
 		int i=0;
 		while (i != fooArray.length){
+
+				try(FileWriter fwm = new FileWriter(moneypath, true);
+					    BufferedWriter bwm = new BufferedWriter(fwm);
+					    PrintWriter out = new PrintWriter(bwm))
+					{
+					    out.println(fooArray[aa]);
+
+					} catch (IOException e) {
+					    
+					}
 			
-		try {
-			bwm.write(fooArray[aa]);
-			bwm.newLine();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	
 		aa++;
 		i++;
 		}
 		
 		
-		try {
-			bwm.write("x");
-			bwm.newLine();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		try(FileWriter fwm = new FileWriter(moneypath, true);
+			    BufferedWriter bwm = new BufferedWriter(fwm);
+			    PrintWriter out = new PrintWriter(bwm))
+			{
+			    out.println("x");
+
+			} catch (IOException e) {
+			    
+			}
+		
 		randomLetters();
 	 }
 	 
@@ -522,6 +539,7 @@ public class Main {
 		
 		
 		menuShow();
+		
 
 		
 		
