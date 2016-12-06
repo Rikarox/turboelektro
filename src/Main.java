@@ -5,6 +5,7 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -25,10 +26,13 @@ public class Main {
 	public static String listpath = "list.txt";
 	public static File file = new File("name.txt");
 	public static File fileM = new File("money.txt");
-	
 	public static String nameSet;
 	public static BufferedWriter bw = null;
 	public static FileWriter fw = null;
+	public static BufferedWriter bwm = null;
+	public static FileWriter fwm = null;
+	public static String redo;
+	
 	public static String name;
 	public static String[] nameArray;
 	
@@ -65,16 +69,12 @@ public class Main {
 	public static void line() throws IOException{
 		//get data
 		BufferedReader reader = null;
-		BufferedReader readerM = null;
 		int num=0;
 	
 	    	
 		    reader = new BufferedReader(new FileReader(file));
-		    readerM = new BufferedReader(new FileReader(fileM));
-		    
 		    name = reader.readLine();
-		    decodeRX5();
-		    
+			decodeRX5();
 		
 	System.out.println("");
 	System.out.println("");
@@ -91,6 +91,8 @@ public class Main {
 		String content = nameSet;
 	
 		file.createNewFile();
+		fileM.createNewFile();
+		
 		
 		try {
 
@@ -98,8 +100,9 @@ public class Main {
 			fw = new FileWriter(namepath);
 			bw = new BufferedWriter(fw);
 			bw.write(content);
+			
 
-			System.out.println("Done");
+			System.out.println("Shop Created !");
 
 		} catch (IOException e) {
 
@@ -114,6 +117,64 @@ public class Main {
 
 				if (fw != null)
 					fw.close();
+
+			} catch (IOException ex) {
+
+				ex.printStackTrace();
+
+			}
+		}
+		try {
+
+
+			fwm = new FileWriter(moneypath);
+			bwm = new BufferedWriter(fwm);
+			bwm.write("a");
+			bwm.newLine();
+			bwm.write("v");
+			bwm.newLine();
+			bwm.write("c");
+			bwm.newLine();
+			bwm.write("a");
+			bwm.newLine();
+			bwm.write("h");
+			bwm.newLine();
+			
+			
+			bwm.write("t");
+			bwm.newLine();
+			bwm.write("p");
+			bwm.newLine();
+			bwm.write("p");
+			bwm.newLine();
+			bwm.write("p");
+			bwm.newLine();
+			
+			bwm.write("x");
+			bwm.newLine();
+			
+			bwm.write("d");
+			bwm.newLine();
+			bwm.write("h");
+			bwm.newLine();
+			bwm.write("l");
+			
+
+			System.out.println("5000 E added !");
+
+		} catch (IOException e) {
+
+			e.printStackTrace();
+
+		} finally {
+
+			try {
+
+				if (bwm != null)
+					bwm.close();
+
+				if (fwm != null)
+					fwm.close();
 
 			} catch (IOException ex) {
 
@@ -287,9 +348,32 @@ public class Main {
 	 */
 	
 	
-	 public static void decodeRX5(){
-		 // chcem aby so suboru money od 6 riadku tahalo znaky a zapisovalo do jedneho stringu foo, ak sa znak nebude rovnat qwertyuiop tak ukonci pridavanie
-	 foo = foo.replace('q', '1');
+	 public static void decodeRX5() throws IOException{
+	 BufferedReader reader = null;
+	 
+	 FileReader f;
+	try {
+		foo="";
+		f = new FileReader(fileM);
+		BufferedReader br = new BufferedReader(f);
+		
+		 while ((redo=br.readLine())!=null)
+	     {
+			 if(redo.equals("q") || redo.equals("w") || redo.equals("e") || redo.equals("r") || redo.equals("t") || redo.equals("y") || redo.equals("u") || redo.equals("i") || redo.equals("o") || redo.equals("p")){
+				 foo = foo +redo;
+				 System.out.println(foo);	 
+			 }
+			 if(redo.equals("x")){
+				 break;
+			 }
+	     }
+		
+	} catch (FileNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	 
+     foo = foo.replace('q', '1');
 	 foo = foo.replace('w', '2');
 	 foo = foo.replace('e', '3');
 	 foo = foo.replace('r', '4');
@@ -299,6 +383,7 @@ public class Main {
 	 foo = foo.replace('i', '8');
 	 foo = foo.replace('o', '9');
 	 foo = foo.replace('p', '0');
+	 System.out.println(foo);
 	 
 	 fooInt = Integer.parseInt(foo);
 	 money = fooInt;	 
@@ -313,14 +398,43 @@ public class Main {
 
 		    String alphabet = "asdfghjklzcvbnm";
 		    for (int i = 0; i < 5; i++) {
-		    	//zapis do suboru money.txt
-		        System.out.println(alphabet.charAt(r.nextInt(alphabet.length())));
+		    	
+				try {
+					bwm.write(alphabet.charAt(r.nextInt(alphabet.length())));
+					bwm.newLine();
+					
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
 		    } 
 	 }
 	 
 	 
 	 public static void encodeRX5(){
-		//vymazat vsetko zo suboru money.txt
+
+		 try{
+
+
+	    		if(fileM.delete()){
+	    			System.out.println(fileM.getName() + " is deleted!");
+	    		}else{
+	    			System.out.println("Error !");
+	    		}
+
+	    	}catch(Exception e){
+
+	    		e.printStackTrace();
+
+	    	}
+		 
+		try {
+			fileM.createNewFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 		randomLetters();
 	    
 	    StringBuilder fooConv = new StringBuilder();
@@ -345,13 +459,26 @@ public class Main {
 		int i=0;
 		while (i != fooArray.length){
 			
-		//fooArray[a] print do suboru
+		try {
+			bwm.write(fooArray[aa]);
+			bwm.newLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 		aa++;
 		i++;
 		}
 		
-	    //zapisat fooArray do money.txt
-        //zapisat do suboru "x"
+		
+		try {
+			bwm.write("x");
+			bwm.newLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		randomLetters();
 	 }
 	 
