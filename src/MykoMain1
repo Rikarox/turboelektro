@@ -6,23 +6,26 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
 
 public class Program {
-
+public static float money = 5000;
+public static int amount = 0;
 	public static void main(String[] args) throws InterruptedException {
 
 		Scanner sc = new Scanner(System.in);
 		String foo;
 		int fooInt;
-		int money;
+		
 		String optionS = ""; 
 		int option = 0;
+		float money = Program.money;
+		int amount = Program.amount;
 		String buyOptionS = ""; 
 		int buyOption = 0;
 		int exit = 0;
 		String name = "";
-		int amount = 0;
 		int pNumber = 0;
 		String thisLine = "";
 		String path = "Turboelektro.txt";
@@ -45,11 +48,11 @@ public class Program {
 		
 		// JUST FOR FUN
 
-		System.out.printf("Loading shop.");
-		TimeUnit.SECONDS.sleep(1);
-		System.out.printf(".");
-		TimeUnit.SECONDS.sleep(1);
-		System.out.printf(".");
+		//System.out.printf("Loading shop.");
+	//	TimeUnit.SECONDS.sleep(1);
+	//	System.out.printf(".");
+	//	TimeUnit.SECONDS.sleep(1);
+	//	System.out.printf(".");
 
 		// ****************
 		// Shop starts here
@@ -95,9 +98,15 @@ public class Program {
 					}
 					System.out.println("Set how much to add.");
 					amount = sc.nextInt();
+					buyEx(pNumber,path);
 					
-					amount = amount + buyEx(pNumber, path);
-					System.out.println(amount);
+					money = money - Program.money ;
+					System.out.println("Money:"+money);
+					
+					amount = amount + Program.amount  ;
+					System.out.println("Amount:"+amount);
+					
+					
 					
 					break;
 				case 2:
@@ -173,19 +182,21 @@ public class Program {
 		}
 	}
 	
-	public static int buyEx(int pNumber, String path){
+		
+		
+		
+	public static void buyEx(int pNumber, String path){
 		
 		String a = "";
+		String b = "";
 		String thisLine="";
 		int getAmount = 0;
 		int amount = 0;
+		int getMoney = 0;
+		float money = 0;
 		
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(path, true))) {
-		
-			
-			
 			try {
-			
 			BufferedReader br = new BufferedReader(new FileReader(path));
 				for(int i = 0; i < pNumber; i++){
 				thisLine = br.readLine();}
@@ -195,28 +206,49 @@ public class Program {
 				for (int i = 0; i < thisLine.length(); i++) {
 					char c = thisLine.charAt(i);
 					
+					if (c == '*') {
+						getMoney ++;
+					}
+					
+					if (getMoney == 1){
+						if(c != '*'){a = a +	Character.toString(c);}	
+					}
+					
 					if (c == '#') {
 						getAmount ++;
 					}
 					
 					if (getAmount == 1){
-						if(c == '#'){}
-						else{
-						a = a +	Character.toString(c);
-						}
+						if(c != '#'){b = b +	Character.toString(c);}
 					}
 				
 				}
 				try {
-					amount = Integer.parseInt(a);
+					amount = Integer.parseInt(b);
 					
 					
 				} catch (NumberFormatException e) {
-					System.out.println("NumberFormatException");
+					
 					
 				}
+				try {
+					money = Float.parseFloat(a);
+					
+					
+				} catch (NumberFormatException e) {
+					
+					
+				}
+		
 			
-		} catch (Exception e) {
+				Program.money = money*amount;
+				Program.amount = amount;
+			}
+			
+			
+			
+			
+			catch (Exception e) {
 			e.printStackTrace();
 		}
 			
@@ -227,8 +259,9 @@ public class Program {
 			e.printStackTrace();
 		}
 		
-		return amount;
+		
 	}
+	
 	/*______________________________________________________ 
 	 * nameSet(){
 	 * scanner na string nameSet
