@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -10,100 +12,224 @@ import javax.swing.plaf.synth.SynthSeparatorUI;
 public class Program {
 
 	public static void main(String[] args) throws InterruptedException {
-		 
-			Scanner sc = new Scanner(System.in);
-				String foo;
-				int fooInt;
-				int money;
-				int option = 0;
-				int exit = 0;
-				String thisLine = "";
-				String path  = "Turboelektro.txt";
-				
-        try {
-				      File file = new File(path);
 
-				      if (file.createNewFile()){
-				       System.out.println("File created.");
-				      }else{
-				    	  System.out.println("");
-				      }
+		Scanner sc = new Scanner(System.in);
+		String foo;
+		int fooInt;
+		int money;
+		String optionS = ""; 
+		int option = 0;
+		String buyOptionS = ""; 
+		int buyOption = 0;
+		int exit = 0;
+		String name = "";
+		int amount = 0;
+		int pNumber = 0;
+		String thisLine = "";
+		String path = "Turboelektro.txt";
+		
+		
+		
+		try {
 
-			    	} catch (IOException e) {
-				      e.printStackTrace();
-			    	}
-				
-        
-        // JUST FOR FUN
-				
-					System.out.printf("Loading shop.");
-					TimeUnit.SECONDS.sleep(1);
-					System.out.printf(".");
-					TimeUnit.SECONDS.sleep(1);
-					System.out.printf(".");
-					
-          //****************
-          //Shop starts here
-          //****************
-          
-          do {		
-					menuShow();	
-					
-					option = sc.nextInt();
-					
-					switch (option) {
-					case 1 : try {
+			File file = new File(path);
 
-						BufferedReader br = new BufferedReader(new FileReader(path));
-						while ((thisLine = br.readLine()) != null) {
-							System.out.println(thisLine);
-						}
-					} catch (Exception e2) {
-						e2.printStackTrace();
+			if (file.createNewFile()) {
+				System.out.println("File created.");
+			} else {
+				System.out.println("");
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		// JUST FOR FUN
+
+		System.out.printf("Loading shop.");
+		TimeUnit.SECONDS.sleep(1);
+		System.out.printf(".");
+		TimeUnit.SECONDS.sleep(1);
+		System.out.printf(".");
+
+		// ****************
+		// Shop starts here
+		// ****************
+
+		do {
+			 option = 0;
+			menuShow();
+		while (option == 0){
+			System.out.println("Choose from the list above.");
+			optionS = sc.next();
+			try {
+				option = Integer.parseInt(optionS);
+			} catch (NumberFormatException e) {
+				
+			}
+		}
+			switch (option) {
+			case 1: reader(path);
+				break;
+			
+			case 2:
+				System.out.println("1. Add to an existing product");
+				System.out.println("2. Add new product");
+
+				buyOptionS = sc.next();
+				try {
+					buyOption = Integer.parseInt(buyOptionS);
+				} catch (NumberFormatException e) {
+
+				}
+				
+				switch (buyOption) { // second switch
+				case 1:
+					System.out.println("Choose the product number.");
+					
+					reader(path);	
+					
+					try{
+					pNumber = sc.nextInt();
+					}catch (InputMismatchException e){
+						System.out.println("Wrong input.");
 					}
+					System.out.println("Set how much to add.");
+					amount = sc.nextInt();
+					
+					amount = amount + buyEx(pNumber, path);
+					System.out.println(amount);
+					
 					break;
-					case 2 : System.out.println("Udner construction.");break;
-					case 3 : System.out.println("Udner construction.");break;
-					case 4 : System.out.println("Udner construction.");break;
-					case 5 : System.out.println("Udner construction.");break;
-					case 6 : exit++;break;
-					default : System.out.println("Choose from the list below.");break;
-					}
+				case 2:
+					System.out.println("Set product name.");
 					
-					
-					
-					
-					}while(exit == 0);
-	}
-//****************
-//End of main
-//****************
+					break;
 
-public static void menuShow(){
-	 line();
-	
-		System.out.println("1. Products");
-		System.out.println("2. Buy product");
-		System.out.println("3. Sell product");
+				default:
+					System.out.println("Wrong input.");
+					break;
+				}
+				// end of second switch
+				break;
+			case 3:
+				System.out.println("Udner construction.");
+				break;
+			case 4:
+				System.out.println("Udner construction.");
+				break;
+			case 5:
+				System.out.println("Udner construction.");
+				break;
+			case 6:
+				exit++;
+				break;
+
+			default:
+				System.out.println("Choose from the list below.");
+				break;
+			}
+			
+		} while (exit == 0);
+	}
+	// ****************
+	// End of main
+	// ****************
+
+	public static void menuShow() {
+		line();
+
+		System.out.println("1. Products info");
+		System.out.println("2. Buy products");
+		System.out.println("3. Sell products");
 		System.out.println("4. Settings");
 		System.out.println("5. Credits");
 		System.out.println("6. Exit");
 	}
-	
-	
-	
-	public static void line(){
-	System.out.println("");
-	System.out.println("");
-	System.out.println("_______________________________________");
-	// decodeRX5();
-	//money = fo;
-	// companyName zo suboru compname, money zo suboru compmoney
-	System.out.println("Money: "       + "Shop Name: ");
-	System.out.println();
+
+	public static void line() {
+		System.out.println("");
+		System.out.println("");
+		System.out.println("_______________________________________");
+		// decodeRX5();
+		// money = foo;
+		// companyName zo suboru compname, money zo suboru compmoney
+		System.out.println("Money: " + "Shop Name: ");
+		System.out.println();
+	}
+
+	public static void reader(String PATH){
+		try {
+			String thisLine = "";
+			String path = PATH;
+			BufferedReader br = new BufferedReader(new FileReader(path));
+			while ((thisLine = br.readLine()) != null) {
+				thisLine = thisLine.replace("*"," ");
+				thisLine = thisLine.replace("#"," ");
+				
+				System.out.println(thisLine);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
-	
+	public static int buyEx(int pNumber, String path){
+		
+		String a = "";
+		String thisLine="";
+		int getAmount = 0;
+		int amount = 0;
+		
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(path, true))) {
+		
+			
+			
+			try {
+			
+			BufferedReader br = new BufferedReader(new FileReader(path));
+				for(int i = 0; i < pNumber; i++){
+				thisLine = br.readLine();}
+				
+				
+				
+				for (int i = 0; i < thisLine.length(); i++) {
+					char c = thisLine.charAt(i);
+					
+					if (c == '#') {
+						getAmount ++;
+					}
+					
+					if (getAmount == 1){
+						if(c == '#'){}
+						else{
+						a = a +	Character.toString(c);
+						}
+					}
+				
+				}
+				try {
+					amount = Integer.parseInt(a);
+					
+					
+				} catch (NumberFormatException e) {
+					System.out.println("NumberFormatException");
+					
+				}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+			
+		
+		}
+
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return amount;
+	}
 	/*______________________________________________________ 
 	 * nameSet(){
 	 * scanner na string nameSet
@@ -117,8 +243,7 @@ public static void menuShow(){
 	 * productSetUp();
 	 *______________________________________________________
 	 */
-	
-	
+
 	/*______________________________________________________
 	 *list(){ 
 	 *line();
@@ -134,7 +259,7 @@ public static void menuShow(){
 	 *   menuShow();
 	 *______________________________________________________
 	 */
-	
+
 	/*______________________________________________________
 	 *buy(){ 
 	 *line();
@@ -143,14 +268,14 @@ public static void menuShow(){
 	 * abo new product
 	 *______________________________________________________
 	 */
-	
+
 	/*______________________________________________________
 	 *sell(){ 
 	 * otazka.. cislo produktu ktory chce predat
 	 * toto musime poriesit ako sa na to pustime je tu viacero moznosti
 	 *______________________________________________________
 	 */
-	
+
 	/*______________________________________________________
 	 *randomSell(){ 
 	 *line();
@@ -159,7 +284,7 @@ public static void menuShow(){
 	 *   asi kasleme na toto :D
 	 *______________________________________________________
 	 */
-	
+
 	/*______________________________________________________
 	 *settings(){ 
 	 *line();
@@ -175,7 +300,7 @@ public static void menuShow(){
 	 * menuShow(); 3
 	 *______________________________________________________
 	 */
-	
+
 	/*______________________________________________________
 	 *credits(){ 
 	 *printf kto to vyrobil a preco(skolska uloha)
@@ -183,13 +308,13 @@ public static void menuShow(){
 	 *menuShow();
 	 *______________________________________________________
 	 */
-	
+
 	/*______________________________________________________
 	 *exit(){
 	 *System.exit(0)
 	 *______________________________________________________
 	 */
-	
+
 	/*______________________________________________________
 	 *nameChange(){
 	 *scanner na string nameSet
@@ -198,7 +323,7 @@ public static void menuShow(){
 	 *menuShow();
 	 *______________________________________________________
 	 */
-	
+
 	/*______________________________________________________
 	 *restartProgram(){
 	 *bud delete suborov alebo len nahradenie prazdnym, asi skor delete
@@ -206,7 +331,7 @@ public static void menuShow(){
 	 *exit();
 	 *______________________________________________________
 	 */
-	
+
 	/*______________________________________________________
 	 *productSetUp(){
 	 *najoblubenejsia uloha
@@ -215,58 +340,57 @@ public static void menuShow(){
 	 *menuShow();  
 	 *______________________________________________________
 	 */
-	
+
 	/*______________________________________________________
 	 *checkOut(){
 	 *najst subor reg.txt
 	 *if string nameOn = yes pokracuj, else nameSet();
 	 *______________________________________________________
 	 */
-	
-	
-	 public static void decodeRX5(){
-		 // chcem aby so suboru money od 6 riadku tahalo znaky a zapisovalo do jedneho stringu foo, ak sa znak nebude rovnat qwertyuiop tak ukonci pridavanie
-	String foo = "";
-	int fooInt = 0;
-	int money = 0;
-	 foo = foo.replace('q', '1');
-	 foo = foo.replace('w', '2');
-	 foo = foo.replace('e', '3');
-	 foo = foo.replace('r', '4');
-	 foo = foo.replace('t', '5');
-	 foo = foo.replace('y', '6');
-	 foo = foo.replace('u', '7');
-	 foo = foo.replace('i', '8');
-	 foo = foo.replace('o', '9');
-	 foo = foo.replace('p', '0');
-	 
-	 fooInt = Integer.parseInt(foo);
-	 money = fooInt;	 
 
-	 }
-	
-	
-	 public static void randomLetters(){
-		 Random r = new Random();
+	public static void decodeRX5() {
+		// chcem aby so suboru money od 6 riadku tahalo znaky a zapisovalo do
+		// jedneho stringu foo, ak sa znak nebude rovnat qwertyuiop tak ukonci
+		// pridavanie
+		String foo = "";
+		int fooInt = 0;
+		int money = 0;
+		foo = foo.replace('q', '1');
+		foo = foo.replace('w', '2');
+		foo = foo.replace('e', '3');
+		foo = foo.replace('r', '4');
+		foo = foo.replace('t', '5');
+		foo = foo.replace('y', '6');
+		foo = foo.replace('u', '7');
+		foo = foo.replace('i', '8');
+		foo = foo.replace('o', '9');
+		foo = foo.replace('p', '0');
 
-		    String alphabet = "asdfghjklzcvbnm";
-		    for (int i = 0; i < 5; i++) {
-		    	//zapis do suboru money.txt
-		        System.out.println(alphabet.charAt(r.nextInt(alphabet.length())));
-		    } 
-	 }
-	 
-	 
-	 public static void encodeRX5(){
-		//vymazat vsetko zo suboru money.txt
+		fooInt = Integer.parseInt(foo);
+		money = fooInt;
+
+	}
+
+	public static void randomLetters() {
+		Random r = new Random();
+
+		String alphabet = "asdfghjklzcvbnm";
+		for (int i = 0; i < 5; i++) {
+			// zapis do suboru money.txt
+			System.out.println(alphabet.charAt(r.nextInt(alphabet.length())));
+		}
+	}
+
+	public static void encodeRX5() {
+		// vymazat vsetko zo suboru money.txt
 		randomLetters();
-	    String foo = "";
-	    int money  = 0;
-	    StringBuilder fooConv = new StringBuilder();
-	    fooConv.append("");
-	    fooConv.append(money);
-	    foo = fooConv.toString();
-	    
+		String foo = "";
+		int money = 0;
+		StringBuilder fooConv = new StringBuilder();
+		fooConv.append("");
+		fooConv.append(money);
+		foo = fooConv.toString();
+
 		foo = foo.replace('1', 'q');
 		foo = foo.replace('2', 'w');
 		foo = foo.replace('3', 'e');
@@ -277,11 +401,10 @@ public static void menuShow(){
 		foo = foo.replace('8', 'i');
 		foo = foo.replace('9', 'o');
 		foo = foo.replace('0', 'p');
-		
-	    //zapisat foo do money.txt
-       //zapisat do suboru "x"
-		randomLetters();
-	 }
 
-	 
+		// zapisat foo do money.txt
+		// zapisat do suboru "x"
+		randomLetters();
+	}
+
 }
