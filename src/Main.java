@@ -2,10 +2,15 @@
  *  TURBOSHOP ULTRA BEAST ELECTRO SHOP @miko @bundy @roxor
  */
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-import javax.swing.plaf.synth.SynthSeparatorUI;
 
 public class Main {
 	// ints,string,float,chars here.. dame ich ako public do mainu
@@ -14,6 +19,20 @@ public class Main {
 	private static int money;
 	public static Scanner sc = new Scanner(System.in);
 	public static int menuChoice;
+	public static int menuChoice2;
+	public static String namepath = "name.txt";
+	public static String moneypath = "money.txt";
+	public static String listpath = "list.txt";
+	public static File file = new File("name.txt");
+	public static File fileM = new File("money.txt");
+	
+	public static String nameSet;
+	public static BufferedWriter bw = null;
+	public static FileWriter fw = null;
+	public static String name;
+	public static String[] nameArray;
+	
+	
 	
 	// JUST FOR FUN
 	public static void intro() throws InterruptedException{
@@ -22,10 +41,11 @@ public class Main {
 		System.out.printf(".");
 		TimeUnit.SECONDS.sleep(1);
 		System.out.printf(".");
+		TimeUnit.SECONDS.sleep(1);
 	}
 	
 	
-	 public static void menuShow(){
+	 public static void menuShow() throws IOException, InterruptedException{
 		 line();
 		 System.out.println("1) Products");
 		 System.out.println("2) Buy");
@@ -35,24 +55,77 @@ public class Main {
 		 System.out.println("6) Exit");
 		 
 		 menuChoice = sc.nextInt();
+		 ifka();
 		 
 		
 	 }
 	
 	
 	
-	public static void line(){
+	public static void line() throws IOException{
+		//get data
+		BufferedReader reader = null;
+		BufferedReader readerM = null;
+		int num=0;
+	
+	    	
+		    reader = new BufferedReader(new FileReader(file));
+		    readerM = new BufferedReader(new FileReader(fileM));
+		    
+		    name = reader.readLine();
+		    decodeRX5();
+		    
+		
+	System.out.println("");
+	System.out.println("");
 	System.out.println("");
 	System.out.println("");
 	System.out.println("_______________________________________");
-	// decodeRX5();
-	//money = fo;
-	// companyName zo suboru compname, money zo suboru compmoney
-	System.out.println("Money: "       + "Shop Name: ");
+	System.out.println("Money: " +money +" | "      + "Shop Name: " +name);
 	System.out.println();
 	}
 	
-	public static void nameSet(){}
+	public static void nameSet() throws IOException, InterruptedException{
+		System.out.println("Enter Shop Name: ");
+		nameSet = sc.nextLine();
+		String content = nameSet;
+	
+		file.createNewFile();
+		
+		try {
+
+
+			fw = new FileWriter(namepath);
+			bw = new BufferedWriter(fw);
+			bw.write(content);
+
+			System.out.println("Done");
+
+		} catch (IOException e) {
+
+			e.printStackTrace();
+
+		} finally {
+
+			try {
+
+				if (bw != null)
+					bw.close();
+
+				if (fw != null)
+					fw.close();
+
+			} catch (IOException ex) {
+
+				ex.printStackTrace();
+
+			}
+		}
+		menuShow();
+	}
+	
+	
+	
 	
 	/*______________________________________________________ 
 	 * nameSet(){
@@ -108,35 +181,46 @@ public class Main {
 	
 	
 	
-	public static void settings(){}
+	public static void settings() throws InterruptedException, IOException{
+		
+	line();
+	System.out.println("1) Change name");
+	System.out.println("2) Restart");
+	System.out.println("3) Back");
 	
-	/*______________________________________________________
-	 *settings(){ 
-	 *line();
-	 *vypis
-	 *1)zmena mena
-	 *2)odznova
-	 *3)back
-	 * scanner na int settingsVyber
-	 * case abo if. 
-	 * 
-	 * nameChange(); 1
-	 * restartProgram(); 2
-	 * menuShow(); 3
-	 *______________________________________________________
-	 */
+	 menuChoice2 =sc.nextInt();
+	 if(menuChoice2 == 1){
+			nameChange();	
+			}
+			if(menuChoice2 == 2){
+			restartProgram();	
+			}
+			if(menuChoice2 == 3){
+			menuShow();	
+			}
+			if(menuChoice2 != 1 || menuChoice2 != 2 || menuChoice2 != 3 ){
+			error();
+			settings();
+			}
 	
+	}
 	
-	public static void credits(){}
-	
-	/*______________________________________________________
-	 *credits(){ 
-	 *printf kto to vyrobil a preco(skolska uloha)
-	 *Space to continue
-	 *menuShow();
-	 *______________________________________________________
-	 */
-	
+	public static void credits() throws IOException, InterruptedException{
+		System.out.println("*******************************");
+		System.out.println("");
+		System.out.println("     TURBOELEKTRO 2016");
+		System.out.println("www.bit.ly/GitHub_turboelektro");
+		System.out.println("");
+		System.out.println("@R.Olejar @A.Bodnar @A.Rosko");
+		System.out.println("");
+		System.out.println("*******************************");
+		System.out.println("Press \"ENTER\" to continue...");
+		   Scanner scanner = new Scanner(System.in);
+		   scanner.nextLine();
+		
+		   menuShow();
+		
+	}
 	public static void exit(){
 	 System.exit(0);
 	}
@@ -173,7 +257,27 @@ public class Main {
 	 *______________________________________________________
 	 */
 	
-	public static void checkOut(){}
+	public static void checkOut() throws IOException, InterruptedException{
+		
+		boolean exists = file.exists();
+		if(exists == true){
+			menuShow();
+		
+		}
+		if(exists == false){
+
+			
+			try {
+				nameSet();
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+				
+		}
+		
+	}
 	
 	/*______________________________________________________
 	 *checkOut(){
@@ -200,6 +304,8 @@ public class Main {
 	 money = fooInt;	 
 
 	 }
+	 
+	 
 	
 	
 	 public static void randomLetters(){
@@ -244,7 +350,7 @@ public class Main {
 		i++;
 		}
 		
-	    //zapisat foo do money.txt
+	    //zapisat fooArray do money.txt
         //zapisat do suboru "x"
 		randomLetters();
 	 }
@@ -256,56 +362,40 @@ public class Main {
 
 	 
 	
-	public static void main(String[] args) throws InterruptedException {
-		//checkOut();
+	 public static void ifka() throws IOException, InterruptedException{
+		 if(menuChoice == 1){
+				list();	
+				}
+				if(menuChoice == 2){
+				buy();	
+				}
+				if(menuChoice == 3){
+				sell();	
+				}
+				if(menuChoice == 4){
+				settings();	
+				}
+				if(menuChoice == 5){
+				credits();	
+				}
+				if(menuChoice == 6){
+				exit();	
+				}
+				if(menuChoice != 1 || menuChoice != 2 || menuChoice != 3 || menuChoice != 4 || menuChoice != 5 || menuChoice != 6 ){
+				error();
+				menuShow();
+				}
+	 }
+	 
+	public static void main(String[] args) throws InterruptedException, IOException {
+		checkOut();
 		//intro();
-
-
+		
+	
+		
 		
 		menuShow();
-		if(menuChoice == 1){
-		list();	
-		}
-		if(menuChoice == 2){
-		buy();	
-		}
-		if(menuChoice == 3){
-		sell();	
-		}
-		if(menuChoice == 4){
-		settings();	
-		}
-		if(menuChoice == 5){
-		credits();	
-		}
-		if(menuChoice == 6){
-		exit();	
-		}
-		if(menuChoice != 1 || menuChoice != 2 || menuChoice != 3 || menuChoice != 4 || menuChoice != 5 || menuChoice != 6 ){
-		error();
-		menuShow();
-		}
 
-		
-		
-		// case abo if, na vyber moznosti
-		/*
-		 * list();
-		 * randomSell();  *optional moznost
-		 * settings();
-		 * credits();
-		 * exit();
-		 * 
-		 * 
-		 */
-		
-		// line();
-		
-		
-		
-
-		
-		
 		
 		
 	}
