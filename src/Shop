@@ -1,0 +1,244 @@
+ wodap how is it going bros my name is w/e 
+
+taze asi takto, shop ide / da sa nakupovat aj predavat / nemalo by to hadzat exceptions ziadne ked hej ta napiste ze kde abo co :D
+/ teraz, do suboru zapisujte systemom:     meno-cena-pocet-      // ende  inak to nepojde / 
+neni tam ta marza ci co to malo byt = will add later
+neni tam ani to formatovanie este 
+
+++ dakto zrobte ten zoznam productov co budeme predavat 
+
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.*;
+
+public class Program {
+
+	public static float money = 5000;
+	public static String PATH = "Turboelektro.txt";
+	public static File file = new File(PATH);
+	public static ArrayList<String> text = new ArrayList<String>();
+
+	public static void main(String[] args) throws InterruptedException {
+
+		Scanner sc = new Scanner(System.in);
+		String optionS = "";
+		int option = 0;
+
+		int exit = 0;
+
+		try {
+			if (file.createNewFile()) {
+				System.out.println("File created.");
+			} else {
+				System.out.println("");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		// ****************
+		// Shop starts here
+		// ****************
+
+		do {
+
+			option = 0;
+			menuShow();
+			while (option == 0) {
+				optionS = sc.next();
+				try {
+					option = Integer.parseInt(optionS);
+				} catch (NumberFormatException e) {
+
+				}
+			}
+			switch (option) {
+			case 1:
+				reader(PATH);
+				break;
+			case 2:
+				buy(PATH);
+				break;
+			case 3:
+				sell(PATH);
+				break;
+			case 4:
+				exit++;
+				break;
+
+			default:
+				System.out.println("Choose from the list below.");
+				break;
+			}
+
+		} while (exit == 0);
+		
+	}
+	// ****************
+	// End of main
+	// ****************
+
+	public static void menuShow() {
+		line();
+
+		System.out.println("1. Products info");
+		System.out.println("2. Buy products");
+		System.out.println("3. Sell products");
+		System.out.println("4. Exit");
+	}
+
+	public static void line() {
+		System.out.println("_______________________________________");
+		System.out.println("Money: " + money);
+		System.out.println();
+	}
+
+	public static void reader(String PATH) {
+		try {
+			String thisLine = "";
+			BufferedReader br = new BufferedReader(new FileReader(PATH));
+			while ((thisLine = br.readLine()) != null) {
+				text.add(thisLine);
+				thisLine = thisLine.replace("-", " ");
+				System.out.println(thisLine);
+			}
+			br.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void buy(String path) {
+		Scanner sce = new Scanner(System.in);
+		String bName = "";
+		String name = "";
+		int amount = 0;
+		int addAmount = 0;
+		String addAmountS = "";
+		float price = 0;
+		text.clear();
+
+		System.out.println("Buy product: ");
+
+		reader(PATH);
+		while (bName.equals("")) {
+			bName = sce.nextLine();
+		}
+		for (int i = 0; i < text.size(); i++) {
+
+			String parts[] = text.get(i).split("-");
+
+			if (parts[0].equals(bName)) {
+				name = parts[0];
+				price = Float.parseFloat(parts[1]);
+				amount = Integer.parseInt(parts[2]);
+				text.remove(i);
+				break;
+			}
+		}
+
+		if (name != "") {
+			System.out.println("Amount: ");
+
+			addAmountS = sce.next();
+			try {
+				addAmount = Integer.parseInt(addAmountS);
+			} catch (NumberFormatException e) {
+				System.out.println("Wrong input.");
+			}
+
+			if (price * addAmount <= money) {
+				money = money - (price * (float) addAmount);
+				amount = amount + addAmount;
+
+			} else {
+				System.out.println("Not enought money.");
+			}
+
+			try (BufferedWriter bw = new BufferedWriter(new FileWriter(PATH))) {
+				for (int i = 0; i < text.size(); i++) {
+					bw.write(text.get(i));
+					bw.newLine();
+				}
+				bw.write(name + "-" + price + "-" + amount + "-");
+				bw.flush();
+				bw.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			System.out.println("There is no product named: " + '"' + bName + '"');
+		}
+		
+	}
+
+	public static void sell(String path) {
+		Scanner sce = new Scanner(System.in);
+		String sName = "";
+		String name = "";
+		int amount = 0;
+		int subAmount = 0;
+		String subAmountS = "";
+		float price = 0;
+		text.clear();
+		
+		System.out.println("Sell product: ");
+
+		reader(PATH);
+		while (sName.equals("")) {
+			sName = sce.nextLine();
+		}
+		for (int i = 0; i < text.size(); i++) {
+
+			String parts[] = text.get(i).split("-");
+
+			if (parts[0].equals(sName)) {
+				name = parts[0];
+				price = Float.parseFloat(parts[1]);
+				amount = Integer.parseInt(parts[2]);
+				text.remove(i);
+				break;
+			}
+		}
+
+		if (name != "") {
+			System.out.println("Amount: ");
+
+			subAmountS = sce.next();
+			try {
+				subAmount = Integer.parseInt(subAmountS);
+			} catch (NumberFormatException e) {
+				System.out.println("Wrong input.");
+			}
+
+			if (amount >= subAmount) {
+				money = money + (price * (float) subAmount);
+				amount = amount - subAmount;
+
+			} else {
+				System.out.println("Not enought products.");
+			}
+
+			try (BufferedWriter bw = new BufferedWriter(new FileWriter(PATH))) {
+				for (int i = 0; i < text.size(); i++) {
+					bw.write(text.get(i));
+					bw.newLine();
+				}
+				bw.write(name + "-" + price + "-" + amount + "-");
+				bw.flush();
+				bw.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			System.out.println("There is no product named: " + '"' + sName + '"');
+		}
+
+	}
+	
+}
