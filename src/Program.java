@@ -52,7 +52,7 @@ public class Program {
 				
 				
 				try (BufferedWriter bw = new BufferedWriter(new FileWriter(moneyPATH))) {
-						bw.write("5000");
+						bw.write("5000.0");
 						bw.newLine();
 					bw.flush();
 					bw.close();
@@ -180,7 +180,7 @@ public class Program {
 	}
 
 	public static void line() {
-	
+	    readerMoney(moneyPATH);
 		System.out.println("_______________________________________");
 		System.out.println("Money: " + (float)money);
 		System.out.println();
@@ -192,6 +192,22 @@ public class Program {
 			BufferedReader br = new BufferedReader(new FileReader(PATH));
 			while ((thisLine = br.readLine()) != null) {
 			text.add(thisLine);
+			}
+			br.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void readerMoney(String moneyPATH) {
+		try {
+			String thisLine = "";
+			BufferedReader br = new BufferedReader(new FileReader(moneyPATH));
+			while ((thisLine = br.readLine()) != null) {
+			text.add(thisLine);
+			
+			money = Float.parseFloat(thisLine);
+			
 			}
 			br.close();
 		} catch (Exception e) {
@@ -323,7 +339,6 @@ public class Program {
 
 			subAmountS = sce.next();
 			try {
-				subAmount = Integer.parseInt(subAmountS);
 			} catch (NumberFormatException e) {
 				System.out.println("Wrong input.");
 			}
