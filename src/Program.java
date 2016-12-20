@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class Program {
-	public static double money = 5000;
+	public static double money = 5000.0f;
 	public static double margin = 1.008;
 	public static String PATH = "Turboelektro.txt";
 	public static String moneyPATH = "money.txt";
@@ -52,13 +52,49 @@ public class Program {
 				
 				
 				try (BufferedWriter bw = new BufferedWriter(new FileWriter(moneyPATH))) {
-						bw.write("5000");
+						bw.write("5000.0");
 						bw.newLine();
 					bw.flush();
 					bw.close();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				
+				try (BufferedWriter bw = new BufferedWriter(new FileWriter(PATH))) {
+					
+
+					bw.write("INSTAP_ME_620-3.19-1-");
+					bw.newLine();
+					bw.write("Gigabyte_optical.6900-19.9-1-");
+					bw.newLine();
+					bw.write("Roccat_Power_Pack_Starter_Competition_Gaming_Set-50.00-1-");
+					bw.newLine();
+					bw.write("Lenovo_Ideapad_300_80M3003JCK-295.0-1-");
+					bw.newLine();
+					bw.write("LOGO_Illuminated_II-14.9-1-");
+					bw.newLine();
+					bw.write("Logitech_Wireless_Touch_Keyboard_K400_Plus-39.9-1-");
+					bw.newLine();
+					bw.write("ZOWIE_N_CM-9.9-1-");
+					bw.newLine();
+					bw.write("HAL3000_Office_W10_s_SSD-370.0-1-");
+					bw.newLine();
+					bw.write("GENIUS_HS_400A-8.60-1-");
+					bw.newLine();
+					bw.write("Sniper_Headset_GH3300_Surround-30.0-1-");
+					bw.newLine();
+					bw.write("Kingston_HyperX_Cloud-69.9-1- ");
+					bw.newLine();
+					bw.write("Nvidia_Geforce_GT740_OC_1GD5-100.0-1-");
+					bw.newLine();
+					money=money-1011.29;
+					moneyWriter(moneyPATH);
+					
+				bw.flush();
+				bw.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 				
 				
 				
@@ -180,7 +216,7 @@ public class Program {
 	}
 
 	public static void line() {
-	
+	    readerMoney(moneyPATH);
 		System.out.println("_______________________________________");
 		System.out.println("Money: " + (float)money);
 		System.out.println();
@@ -199,11 +235,31 @@ public class Program {
 		}
 	}
 	
+	public static void readerMoney(String moneyPATH) {
+		try {
+			String thisLine = "";
+			BufferedReader br = new BufferedReader(new FileReader(moneyPATH));
+			while ((thisLine = br.readLine()) != null) {
+			text.add(thisLine);
+			
+			money = Float.parseFloat(thisLine);
+			
+			}
+			br.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static void printer (){
 		text.clear();
 		reader(PATH);
+		int num = 1;
+		System.out.println("  NAME   PRICE  AMOUNT");	
 		for(int i =0; i < text.size();i++){
+			System.out.printf(num +". ");
 		System.out.println(text.get(i).replace("-"," "));
+		num++;
 
 		}
 		}
@@ -220,6 +276,22 @@ public class Program {
 			e.printStackTrace();
 		}
 		
+		
+	}
+	
+	public static void moneyWriter(String moneyPATH){
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(moneyPATH))) {
+			for (int i = 0; i < text.size(); i++) {
+				
+				String Line = Float.toString((float) money);
+				bw.write(Line);
+				bw.newLine();
+			}
+			bw.flush();
+			bw.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -266,6 +338,8 @@ public class Program {
 
 				money = money - (price * (2-margin) * (double) addAmount);
 				amount = amount + addAmount;
+				
+				moneyWriter(moneyPATH);
 
 			} else {
 				System.out.println("Not enought money.");
@@ -323,7 +397,6 @@ public class Program {
 
 			subAmountS = sce.next();
 			try {
-				subAmount = Integer.parseInt(subAmountS);
 			} catch (NumberFormatException e) {
 				System.out.println("Wrong input.");
 			}
