@@ -219,7 +219,7 @@ public class Program {
 		text.clear();
 		reader(PATH);
 		for(int i =0; i < text.size();i++){
-			
+		System.out.println("NAME   PRICE  AMOUNT");	
 		System.out.println(text.get(i).replace("-"," "));
 
 		}
