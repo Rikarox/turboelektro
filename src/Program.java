@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class Program {
-	public static double money = 5000;
+	public static double money = 5000.0f;
 	public static double margin = 1.008;
 	public static String PATH = "Turboelektro.txt";
 	public static String moneyPATH = "money.txt";
@@ -219,6 +219,7 @@ public class Program {
 		text.clear();
 		reader(PATH);
 		for(int i =0; i < text.size();i++){
+			
 		System.out.println(text.get(i).replace("-"," "));
 
 		}
@@ -236,6 +237,22 @@ public class Program {
 			e.printStackTrace();
 		}
 		
+		
+	}
+	
+	public static void moneyWriter(String moneyPATH){
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(moneyPATH))) {
+			for (int i = 0; i < text.size(); i++) {
+				
+				String Line = Float.toString((float) money);
+				bw.write(Line);
+				bw.newLine();
+			}
+			bw.flush();
+			bw.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -282,6 +299,8 @@ public class Program {
 
 				money = money - (price * (2-margin) * (double) addAmount);
 				amount = amount + addAmount;
+				
+				moneyWriter(moneyPATH);
 
 			} else {
 				System.out.println("Not enought money.");
