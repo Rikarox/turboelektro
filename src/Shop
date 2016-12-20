@@ -1,9 +1,19 @@
  wodap how is it going bros my name is w/e 
 
 taze asi takto, shop ide / da sa nakupovat aj predavat / nemalo by to hadzat exceptions ziadne ked hej ta napiste ze kde abo co :D
-/ teraz, do suboru zapisujte systemom:     meno-cena-pocet-      // ende  inak to nepojde / 
-neni tam ta marza ci co to malo byt = will add later
-neni tam ani to formatovanie este 
+/ teraz, do suboru zapisujte systemom:     "meno-cena-pocet-"  bez tych "" len aby to bolo jasne  
+/inak to nepojde
+marza je konstantna = 0.8%   / ak chcete tak to zmente :D / vypisovana cena je s marzou taze ked dade buy zobere to menej jak je napisane
+
+neni tam  to formatovanie este ze vypise pod seba ceny pocet 
+
+next funkcie - reader = nahodi co je v subore do arraylistu text
+	       printer = zalova reader a vypise co zisti
+		buy = kupis viac ono neni to az take zlozite ked si to pozrete snad pochopite
+		sell = opak buy ez 
+		writer = neni to dokonale iba raz sa pouzije a to ked deletujes mohlo by to byt aj tak ze sa zavola aj v buy/sell 
+			ale potreboval by upravit
+
 
 ++ dakto zrobte ten zoznam productov co budeme predavat 
 
@@ -17,8 +27,8 @@ import java.io.IOException;
 import java.util.*;
 
 public class Program {
-
-	public static float money = 5000;
+	public static double money = 5000;
+	public static double margin = 1.008;
 	public static String PATH = "Turboelektro.txt";
 	public static File file = new File(PATH);
 	public static ArrayList<String> text = new ArrayList<String>();
@@ -28,7 +38,8 @@ public class Program {
 		Scanner sc = new Scanner(System.in);
 		String optionS = "";
 		int option = 0;
-
+		ArrayList<String> setNewPro = new ArrayList<String>();
+		String name = "";
 		int exit = 0;
 
 		try {
@@ -59,7 +70,7 @@ public class Program {
 			}
 			switch (option) {
 			case 1:
-				reader(PATH);
+				printer();
 				break;
 			case 2:
 				buy(PATH);
@@ -68,16 +79,71 @@ public class Program {
 				sell(PATH);
 				break;
 			case 4:
+				reader(PATH);
+				setNewPro.clear();
+				String a;
+				System.out.println("Set product name:");
+				a = sc.next();
+				setNewPro.add(a);
+				while (setNewPro.size() == 1){
+				System.out.println("Set product price:");
+				a = sc.next();
+				try {
+				Integer.parseInt(a);
+				setNewPro.add(a);
+				}catch(NumberFormatException e){System.out.println("Wrong input.");}	
+				
+				}
+				setNewPro.add("0");
+				
+				try (BufferedWriter bw = new BufferedWriter(new FileWriter(PATH))) {
+					for (int i = 0; i < text.size(); i++) {
+						bw.write(text.get(i));
+						bw.newLine();
+					}
+					bw.write(setNewPro.get(0)+"-" +setNewPro.get(1)+"-"+setNewPro.get(2)+"-");
+					bw.flush();
+					bw.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+
+				break;
+			case 5:
+				name = "";
+				String conf ;
+				
+				System.out.println("Which product you want to delete ?");
+				printer();
+				
+				name = sc.next();
+				for (int i = 0; i < text.size(); i++) {
+
+					String parts[] = text.get(i).split("-");
+
+					if (parts[0].equals(name)) {
+						System.out.println("Do you really wish to delete product: "+'"'+name+'"' + "   Y/N  ?");
+						conf = sc.next();
+						if (conf.equals("y")|| conf.equals("Y")){
+						text.remove(i);	
+						writer();
+						}
+						else{System.out.println("Product was not deletet.");}
+					}
+				}
+			
+				break;
+			case 6:
 				exit++;
 				break;
-
 			default:
 				System.out.println("Choose from the list below.");
 				break;
 			}
 
 		} while (exit == 0);
-		
+
 	}
 	// ****************
 	// End of main
@@ -89,12 +155,15 @@ public class Program {
 		System.out.println("1. Products info");
 		System.out.println("2. Buy products");
 		System.out.println("3. Sell products");
-		System.out.println("4. Exit");
+		System.out.println("4. Add new product");
+		System.out.println("5. Delete a product");
+		System.out.println("6. Exit");
 	}
 
 	public static void line() {
+	
 		System.out.println("_______________________________________");
-		System.out.println("Money: " + money);
+		System.out.println("Money: " + (float)money);
 		System.out.println();
 	}
 
@@ -103,14 +172,35 @@ public class Program {
 			String thisLine = "";
 			BufferedReader br = new BufferedReader(new FileReader(PATH));
 			while ((thisLine = br.readLine()) != null) {
-				text.add(thisLine);
-				thisLine = thisLine.replace("-", " ");
-				System.out.println(thisLine);
+			text.add(thisLine);
 			}
 			br.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static void printer (){
+		text.clear();
+		reader(PATH);
+		for(int i =0; i < text.size();i++){
+		System.out.println(text.get(i).replace("-"," "));
+		}
+		}
+	
+	public static void writer(){
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(PATH))) {
+			for (int i = 0; i < text.size(); i++) {
+				bw.write(text.get(i));
+				bw.newLine();
+			}
+			bw.flush();
+			bw.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
 	}
 
 	public static void buy(String path) {
@@ -120,12 +210,12 @@ public class Program {
 		int amount = 0;
 		int addAmount = 0;
 		String addAmountS = "";
-		float price = 0;
+		double price = 0;
 		text.clear();
 
 		System.out.println("Buy product: ");
 
-		reader(PATH);
+		printer();
 		while (bName.equals("")) {
 			bName = sce.nextLine();
 		}
@@ -153,7 +243,8 @@ public class Program {
 			}
 
 			if (price * addAmount <= money) {
-				money = money - (price * (float) addAmount);
+
+				money = money - (price * (2-margin) * (double) addAmount);
 				amount = amount + addAmount;
 
 			} else {
@@ -174,7 +265,7 @@ public class Program {
 		} else {
 			System.out.println("There is no product named: " + '"' + bName + '"');
 		}
-		
+
 	}
 
 	public static void sell(String path) {
@@ -184,12 +275,13 @@ public class Program {
 		int amount = 0;
 		int subAmount = 0;
 		String subAmountS = "";
-		float price = 0;
+		double price = 0;
 		text.clear();
-		
+
 		System.out.println("Sell product: ");
 
-		reader(PATH);
+		printer();
+
 		while (sName.equals("")) {
 			sName = sce.nextLine();
 		}
@@ -217,7 +309,7 @@ public class Program {
 			}
 
 			if (amount >= subAmount) {
-				money = money + (price * (float) subAmount);
+				money = money + (price * (double) subAmount);
 				amount = amount - subAmount;
 
 			} else {
@@ -240,5 +332,5 @@ public class Program {
 		}
 
 	}
-	
+
 }
