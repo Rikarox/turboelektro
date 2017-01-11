@@ -1,0 +1,161 @@
+
+package hodina4;
+/*
+priemer studentov predmet pohlavie rocnik vek
+zoznam studentov vypis ext. meno priezvisko pohlavie trieda veka 5 pretmetov
+15 ppl
+
++student
++predmet
+nie kazdy 5 predmetov
+*/
+
+import java.util.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class Hodina4 {
+public static Scanner sc = new Scanner(System.in);
+public static int ask;
+public static String addS;
+public static String addSB;
+public static ArrayList<String> text = new ArrayList<String>();
+ 
+    public static void menu(){
+     System.out.println("1 Show Students");
+     System.out.println("2 Average");
+     System.out.println("3 Add Student");
+     System.out.println("4 Add Subject");
+
+     ask();
+    }
+    
+    public static void ask(){
+    ask = sc.nextInt();
+    if(ask == 1){
+    showStudents();   
+    }
+    else if(ask == 2){
+    average();    
+    }
+    else if(ask == 3){
+    addStudent();    
+    }
+    else if(ask == 4){
+    addSubject();    
+    }
+    else if(ask != 1 || ask != 2 || ask != 3 || ask != 4){
+    menu();    
+    }
+        
+    }
+    
+    public static void showStudents(){
+        
+    }
+    public static void average(){
+        
+    }
+    public static void addStudent(){
+    System.out.println(); 
+    
+    System.out.println("First Name of Student:");
+        addS = sc.next();
+        if(addS.matches("^\\d+(\\.\\d+)?")) {
+     System.out.println("WRONG INPUT!");
+        addStudent();
+        }
+        addSB = addS;    
+           
+    System.out.println("Surname of Student:");
+        addSB=addSB+"-";
+        addS = sc.next();
+        if(addS.matches("^\\d+(\\.\\d+)?")) {
+     System.out.println("WRONG INPUT!");
+        addStudent();
+        }
+        addSB =addSB+ addS;
+        
+    System.out.println("Gender(F/M):");
+        addSB=addSB+"-";
+        addS = sc.next();
+        if(addS.equals("F") || addS.equals("f") || addS.equals("M") || addS.equals("m")){
+         
+        addSB = addSB+ addS;
+           
+    System.out.println("Age:");
+        addSB=addSB+"-";
+        addS = sc.next();
+        if(addS.matches("^\\d+(\\.\\d+)?")) {
+  
+            
+        addSB = addSB+ addS;
+        
+    System.out.println("Class:");
+        addSB=addSB+"-";
+        addS = sc.next();
+        addSB = addSB+ addS;
+    
+    
+String[] AddSArray = addSB.split("-");   
+
+     System.out.println(AddSArray[0]);
+     System.out.println(AddSArray[1]);
+     System.out.println(AddSArray[2]);
+     System.out.println(AddSArray[3]);
+     System.out.println(AddSArray[4]);
+     writeStudent();
+                     
+} else {
+      System.out.println("WRONG INPUT!");
+      addStudent();
+}
+        
+        
+
+     
+        }
+        else{
+        System.out.println("WRONG INPUT!");
+        addStudent();
+    }
+
+    }
+     public static void addSubject(){
+    System.out.println("Name of Subject:");
+    
+    
+    }
+    
+     
+     public static void writeStudent(){
+         
+         
+     }
+     
+     public static void reader(String PATH) {
+		try {
+			String thisLine = "";
+			BufferedReader br = new BufferedReader(new FileReader("students.txt"));
+			while ((thisLine = br.readLine()) != null) {
+			text.add(thisLine);
+			}
+			br.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+     
+     
+    public static void main(String[] args) {
+      
+        
+        menu();
+        
+    }
+    
+}
